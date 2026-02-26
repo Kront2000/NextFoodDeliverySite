@@ -1,0 +1,56 @@
+'use client'
+import React from "react";
+import { cn } from "@/lib/utils";
+import {SubmitHandler, useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { addCategorySchema,  addCategoryType } from "@/lib/schemas";
+import { addCategory } from "@/actions/dish-action";
+import { toast } from "sonner";
+
+interface Props {
+    className?: string;
+}
+
+export const AddCategoryForm: React.FC<Props> = ({ className }) => {
+
+    const router = useRouter()
+
+    const form = useForm({
+        mode: "onChange",
+        resolver: zodResolver(addCategorySchema),
+        defaultValues: {
+            name: "",
+        }
+    })
+
+    const onSubmit: SubmitHandler<addCategoryType> = async (data) => {
+        const response = await addCategory(data);
+
+        if (response.success) {
+            toast.success(response.message);
+            router.push("/admin");
+        } else if (response.error) {
+            toast.error(response.message);
+        }
+
+    }
+
+    return (
+        <form onSubmit={form.handleSubmit(onSubmit)} className={cn('flex flex-col  p-[3vw] w-full xs:w-[75%] sm:w-[50%] md:w-[70%] xl:w-[60%] 2xl:w-[50%] items-center  @container', className)}>
+            <div className="flex flex-col w-full md:w-1/2 items-center p-[2cqw] shadow-xl gap-[2cqw] h-fit rounded-2xl @container">
+
+                <div className="w-full flex flex-col ">
+                    <label htmlFor="name" className={cn("font-medium text-[4cqw]", form.formState.errors.name?.message && "text-red-700")}>Название</label>
+                    <input {...form.register("name")} id="name" type="text" className={cn("p-[1cqw] text-[4cqw] rounded-md outline-1 outline-gray-400 focus:outline-primary", form.formState.errors.name?.message && "outline-red-600 focus:outline-red-700")} />
+                    <p className="font-bold text-[4cqw] text-red-700">{form.formState.errors.name?.message}</p>
+                </div>
+
+                <input type="submit" value="Создать категорию" className="cursor-pointer bg-primary/90 text-white px-[2cqw] py-[2cqw] text-[5cqw] h-fit rounded text-center hover:bg-primary/30 transition" />
+            </div>
+
+        </form>
+    );
+};
+
+

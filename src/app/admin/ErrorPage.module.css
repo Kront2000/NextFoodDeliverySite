@@ -1,0 +1,78 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  text-align: center;
+  background: #fff;
+  overflow: hidden;
+  margin: 0;
+}
+
+.number {
+  position: relative;
+  font-family: 'Consolas', monospace;
+  font-weight: 900;
+  font-size: 30vmin;
+  letter-spacing: 5vmin;
+  line-height: 1;
+  /* Результат работы SASS-функции (рассчитанные тени) */
+  text-shadow: 
+    2px -1px 0 #000, 
+    4px -2px 0 hsl(0, 0%, 4%), 
+    6px -3px 0 hsl(0, 0%, 6%), 
+    8px -4px 0 hsl(0, 0%, 8%), 
+    10px -5px 0 hsl(0, 0%, 10%), 
+    12px -6px 0 hsl(0, 0%, 12%), 
+    14px -7px 0 hsl(0, 0%, 14%), 
+    16px -8px 0 hsl(0, 0%, 16%);
+}
+
+.number::before {
+  content: '404';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #673ab7;
+  background-image: 
+    radial-gradient(closest-side at 50% 50%, #ffc107 100%, rgba(0, 0, 0, 0)),
+    radial-gradient(closest-side at 50% 50%, #e91e63 100%, rgba(0, 0, 0, 0));
+  background-repeat: repeat-x;
+  background-size: 40vmin 40vmin;
+  background-position: -100vmin 20vmin, 100vmin -25vmin;
+  mix-blend-mode: screen;
+  animation: moving 10s linear infinite both;
+}
+
+.text {
+  color: rgb(32, 15, 0);
+  font-weight: 400;
+  font-size: 5vmin;
+}
+
+.text span {
+  font-size: 10vmin;
+  display: block;
+}
+
+.me {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 30px;
+  height: 30px;
+  background-size: cover;
+  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1491251/profile/profile-80.jpg');
+  border-radius: 50%;
+  z-index: 10;
+}
+
+@keyframes moving {
+  to {
+    background-position: 100vmin 20vmin, -100vmin -25vmin;
+  }
+}
