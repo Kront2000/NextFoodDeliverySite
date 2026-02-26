@@ -61,6 +61,7 @@ export async function deleteDish(id: number) {
       }
     })
     revalidatePath("/");
+    revalidatePath("/admin");
     return { success: true, message: `Блюдо - ${response.category.name} ${response.name} успешно удалено` }
 
   } catch (error) {
@@ -79,6 +80,7 @@ export async function deleteCategory(id: number) {
 
     })
     revalidatePath("/");
+    revalidatePath("/admin");
     return { success: true, message: `Категория ${response.name} успешно удалена` }
 
   } catch (error) {
