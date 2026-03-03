@@ -39,25 +39,21 @@ export const { auth, signIn, signOut } = NextAuth({
                     const { email, password } = parsedCredentials.data;
                     const user = getUser();
 
-                    console.log('Введено в форме:', email);
-                    console.log('Данные из ENV:', user?.password);
+                    
 
                     if (!user) {
                         console.log('Пользователь из ENV не загрузился!');
                         return null;
                     }
 
-                    // ВРЕМЕННО: замени bcrypt на прямое сравнение, чтобы проверить ENV
-                    // const passwordsMatch = password === user.password;
+                    
                     const hashedPassword = Buffer.from(process.env.ADMIN_PASSWORD || '', 'base64').toString('utf-8');
                     const passwordsMatch = await bcrypt.compare(password, hashedPassword); 
 
                     if (passwordsMatch) {
-                        console.log('Пароли совпали!');
+                        
                         return { id: '1', email: user.email, name: 'Admin' };
-                    } else {
-                        console.log('Пароли НЕ совпали!');
-                    }
+                    } 
                 } else {
                     console.log('Zod ошибка валидации:', parsedCredentials.error.format());
                 }

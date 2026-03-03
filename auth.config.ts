@@ -11,10 +11,10 @@ export const authConfig = {
 
     if (isOnAdmin) {
         if (isLoggedIn) return true;
-        return false; // Явный запрет — Auth.js сам сделает редирект
+        return false; 
     }
     
-    // Для всех остальных страниц (включая /login) разрешаем просмотр
+    
     return true; 
 },
 },
