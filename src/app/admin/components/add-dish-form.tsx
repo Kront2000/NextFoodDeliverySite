@@ -48,6 +48,7 @@ export const AddDishForm: React.FC<Props> = ({ className, categoryId }) => {
 
         if(response.success){
             toast.success(response.message);
+            router.refresh();
             router.push("/admin");
         } else if (response.error){
             toast.error(response.message);

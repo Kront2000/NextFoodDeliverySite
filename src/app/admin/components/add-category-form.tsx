@@ -29,6 +29,7 @@ export const AddCategoryForm: React.FC<Props> = ({ className }) => {
 
         if (response.success) {
             toast.success(response.message);
+            router.refresh();
             router.push("/admin");
         } else if (response.error) {
             toast.error(response.message);

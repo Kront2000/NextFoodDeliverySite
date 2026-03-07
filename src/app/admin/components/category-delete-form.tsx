@@ -24,6 +24,7 @@ export const CategoryDeleteForm: React.FC<Props> = ({ className, category }) => 
 
         if(response.success){
             toast.success(response.message);
+            router.refresh();
             router.push("/admin");
         }else{
             toast.error(response.message);

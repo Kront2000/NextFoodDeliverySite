@@ -2,6 +2,7 @@ import { useBucketStore } from "@/store/use-cart";
 import { useHeaderStore } from "@/store/use-header";
 import { useEffect, useState } from "react";
 
+//Хук следит за тем, когда показывать липкий хедер со списком категорий
 export function useHero() {
     const categoryInView = useHeaderStore((s) => s.categoriesListInView);
     const headerInView = useHeaderStore((s) => s.mainHeaderInView);

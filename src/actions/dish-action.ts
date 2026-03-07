@@ -9,7 +9,7 @@ import { Prisma } from "@/generated/prisma/client";
 
 export async function fetchCategoryWithDishes() {
   try {
-    const data = prisma.category.findMany({
+    const data = await prisma.category.findMany({
       include: {
         dishes: true,
       },
@@ -23,7 +23,7 @@ export async function fetchCategoryWithDishes() {
 
 export async function fetchDishById(id: number) {
   try {
-    const data = prisma.dish.findFirst({
+    const data =  prisma.dish.findFirst({
       where: {
         id: id,
       },
