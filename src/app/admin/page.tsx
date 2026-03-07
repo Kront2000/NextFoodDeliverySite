@@ -11,7 +11,7 @@ import { MobileCartButton } from "@/actions/mobile-cart-button";
 import { CategoriesWithDishes } from "@/lib/definitions";
 import { AdminCategoriesList } from "./components/admin-categories-list";
 
-
+export const dynamic = 'force-dynamic'
 export default async function AdminPage() {
 
   const data: CategoriesWithDishes[] = await fetchCategoryWithDishes();
