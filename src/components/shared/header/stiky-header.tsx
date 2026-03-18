@@ -1,11 +1,10 @@
 'use client'
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { cn } from "@/lib/utils";
 import { Container } from "../container";
 import { CartButton } from "./cart-button";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
-import { useHeaderStore } from "@/store/use-header";
 import { CategoriesList } from "../categories-list";
 import { CategoriesWithDishes } from "@/lib/definitions";
 import { useHero } from "@/hooks/useHero";

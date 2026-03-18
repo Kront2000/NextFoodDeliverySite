@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { ShoppingCart } from "lucide-react";
-import { useHeaderStore } from "@/store/use-header";
 import { useBucketStore } from "@/store/use-cart";
 import { useHero } from "@/hooks/useHero";
 

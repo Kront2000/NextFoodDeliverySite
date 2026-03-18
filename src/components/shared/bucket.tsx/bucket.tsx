@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Container } from "../container";
 import { Button } from "@/components/ui/button";
-import Image from 'next/image';
+
 
 import Link from "next/link";
 import { useBucketStore } from "@/store/use-cart";
