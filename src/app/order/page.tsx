@@ -1,8 +1,8 @@
 "use client"
-import * as z from "zod";
+
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { cn } from "@/lib/utils";
+
 import { OrderFormValues, orderSchema } from "@/lib/schemas";
 import { PersonalDataForm } from "./components/personal-data-form";
 import { Container } from "@/components/shared/container";
@@ -33,7 +33,7 @@ export default function OrderPage() {
   })
 
   const bucket = useBucketStore((s) => s.dishes);
-  const totalPrice = useBucketStore((s) => s.totalCount);
+  const totalPrice = useBucketStore((s) => s.totalPrice);
   const resetBucket = useBucketStore((s) => s.clearCart);
   const setIsOpen = useBucketStore((s) => s.setIsOpen)
   const router = useRouter();
@@ -42,13 +42,13 @@ export default function OrderPage() {
     const dataFormWithBucket: dataFormWithBucket = {
       personalData: data,
       dishes: bucket,
-      totalPrice: totalPrice
+      totalPrice: values.typeOfDelivery == 'dostavka' ? totalPrice + 500 : totalPrice,
     }
 
     const response = await sendOrder(dataFormWithBucket);
 
     if (response.success) {
-      toast.success(response.message, {position: "top-right"});
+      toast.success(response.message, { position: "top-right" });
       resetBucket();
       setIsOpen(false);
       router.push("/")
@@ -57,6 +57,7 @@ export default function OrderPage() {
     }
   }
 
+  const values = form.watch();
 
 
   return (
@@ -73,7 +74,7 @@ export default function OrderPage() {
                 <DeliveryDataForm />
               </div>
 
-              <OrderSubmit className="sticky top-[2vw]" />
+              <OrderSubmit totalPrice={totalPrice} deliveryType={values.typeOfDelivery} className="sticky top-[2vw] " />
             </div>
           </form >
         </FormProvider>
